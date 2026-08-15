@@ -44,7 +44,7 @@ export function SiteFooter() {
             <p>GSTIN: {company.gstin}</p>
             <p>{company.registeredOffice.formatted}</p>
             {phoneLink && company.telephone ? <p><a href={phoneLink}>{company.telephone}</a></p> : null}
-            <p>{company.generalEmail}</p>
+            <p><a href={`mailto:${company.generalEmail}`}>{company.generalEmail}</a></p>
           </address>
         </div>
         <div className="footer-bottom">

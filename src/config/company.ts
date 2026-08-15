@@ -53,7 +53,7 @@ export const company: CompanyConfig = {
   },
   state: "Andhra Pradesh",
   country: "India",
-  telephone: null,
+  telephone: "+91 94943 48091",
   generalEmail: "info@thepolarmedia.com",
   domain: "https://thepolarmedia.com",
   description:
@@ -96,7 +96,7 @@ export const company: CompanyConfig = {
     mark: "/brand/polar-media-logo-mark.png",
     favicon: "/brand/polar-media-favicon-192.png",
   },
-  lastUpdated: "14 August 2026",
+  lastUpdated: "15 August 2026",
 };
 
 export function telephoneHref(value: string | null): string | undefined {

@@ -23,7 +23,7 @@ export default function TermsPage() {
         <section><h2>7. Limitation</h2><p>To the extent permitted by applicable law, the company is not responsible for indirect or consequential loss arising solely from reliance on this general informational website. Any responsibility that cannot lawfully be limited remains unaffected.</p></section>
         <section><h2>8. External links</h2><p>If external links are added in the future, they will be provided for convenience. The company does not control third-party websites or their content and does not adopt them merely by linking.</p></section>
         <section><h2>9. Governing law</h2><p>These terms are governed by the laws of India. Any dispute will be subject to the jurisdiction of a court of competent jurisdiction, subject to applicable law.</p></section>
-        <section><h2>10. Contact</h2><p>The intended corporate contact address for questions about these terms is {company.generalEmail}. Email contact is temporarily unavailable while activation is pending; use the website contact form only when it is enabled.</p></section>
+        <section><h2>10. Contact</h2><p>For questions about these terms, email <a href={`mailto:${company.generalEmail}`}>{company.generalEmail}</a>.</p></section>
       </article>
     </>
   );

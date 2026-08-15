@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { PageHero } from "@/components/page-hero";
-import { company } from "@/config/company";
+import { company, telephoneHref } from "@/config/company";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -10,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const phoneLink = telephoneHref(company.telephone);
+
   return (
     <>
       <PageHero
@@ -31,6 +33,17 @@ export default function ContactPage() {
             </p>
           </article>
           <article className="contact-card">
+            <span className="contact-card__symbol" aria-hidden="true">☎</span>
+            <p className="eyebrow">Company telephone</p>
+            <h2>Phone</h2>
+            {phoneLink && company.telephone ? (
+              <p className="contact-card__email">
+                <a href={phoneLink}>{company.telephone}</a>
+              </p>
+            ) : null}
+            <p className="contact-card__note">Company contact and WhatsApp business number.</p>
+          </article>
+          <article className="contact-card contact-card--wide">
             <span className="contact-card__symbol" aria-hidden="true">⌖</span>
             <p className="eyebrow">Registered office</p>
             <h2>Visit by appointment</h2>
