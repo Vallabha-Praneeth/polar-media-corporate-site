@@ -9,25 +9,12 @@ const TARGET_SELECTOR = ".button, .hero-card, .service-card, .contact-card, .con
 const CARD_SELECTOR = ".hero-card, .service-card, .contact-card, .contact-form";
 const BUTTON_SELECTOR = ".button";
 const GLOW_COLOR = "0, 215, 242";
-const PARTICLE_COUNT = 12;
 const SPOTLIGHT_RADIUS = 300;
 const MOBILE_BREAKPOINT = 768;
 
 function shouldDisable(): boolean {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return true;
   return window.innerWidth <= MOBILE_BREAKPOINT;
-}
-
-function createParticle(x: number, y: number): HTMLDivElement {
-  const el = document.createElement("div");
-  el.className = "magic-border-particle";
-  el.style.cssText = `
-    background: rgba(${GLOW_COLOR}, 1);
-    box-shadow: 0 0 6px rgba(${GLOW_COLOR}, 0.6);
-    left: ${x}px;
-    top: ${y}px;
-  `;
-  return el;
 }
 
 function updateGlow(card: HTMLElement, mouseX: number, mouseY: number, glow: number, radius: number) {
@@ -40,17 +27,10 @@ function updateGlow(card: HTMLElement, mouseX: number, mouseY: number, glow: num
   card.style.setProperty("--glow-radius", `${radius}px`);
 }
 
-type ParticleState = {
-  timeouts: number[];
-  particles: HTMLElement[];
-  hovered: boolean;
-};
-
 export function MagicGlowRoot() {
   useEffect(() => {
     if (shouldDisable()) return;
 
-    const particleState = new WeakMap<HTMLElement, ParticleState>();
     const proximity = SPOTLIGHT_RADIUS * 0.5;
     const fadeDistance = SPOTLIGHT_RADIUS * 0.75;
 
@@ -65,62 +45,6 @@ export function MagicGlowRoot() {
       transparent 70%
     )`;
     document.body.appendChild(spotlight);
-
-    const clearParticles = (card: HTMLElement) => {
-      const state = particleState.get(card);
-      if (!state) return;
-      state.timeouts.forEach((id) => window.clearTimeout(id));
-      state.timeouts = [];
-      state.particles.forEach((particle) => {
-        gsap.to(particle, {
-          scale: 0,
-          opacity: 0,
-          duration: 0.3,
-          ease: "back.in(1.7)",
-          onComplete: () => particle.remove(),
-        });
-      });
-      state.particles = [];
-    };
-
-    const spawnParticles = (card: HTMLElement) => {
-      let state = particleState.get(card);
-      if (!state) {
-        state = { timeouts: [], particles: [], hovered: true };
-        particleState.set(card, state);
-      }
-      state.hovered = true;
-      const { width, height } = card.getBoundingClientRect();
-
-      for (let index = 0; index < PARTICLE_COUNT; index += 1) {
-        const timeoutId = window.setTimeout(() => {
-          const current = particleState.get(card);
-          if (!current?.hovered) return;
-          const particle = createParticle(Math.random() * width, Math.random() * height);
-          card.appendChild(particle);
-          current.particles.push(particle);
-
-          gsap.fromTo(particle, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.7)" });
-          gsap.to(particle, {
-            x: (Math.random() - 0.5) * 100,
-            y: (Math.random() - 0.5) * 100,
-            rotation: Math.random() * 360,
-            duration: 2 + Math.random() * 2,
-            ease: "none",
-            repeat: -1,
-            yoyo: true,
-          });
-          gsap.to(particle, {
-            opacity: 0.3,
-            duration: 1.5,
-            ease: "power2.inOut",
-            repeat: -1,
-            yoyo: true,
-          });
-        }, index * 100);
-        state.timeouts.push(timeoutId);
-      }
-    };
 
     const handleMouseMove = (event: MouseEvent) => {
       const targets = document.querySelectorAll<HTMLElement>(TARGET_SELECTOR);
@@ -174,24 +98,6 @@ export function MagicGlowRoot() {
       });
     };
 
-    const handlePointerOver = (event: Event) => {
-      const card = (event.target as HTMLElement | null)?.closest?.(CARD_SELECTOR);
-      if (!(card instanceof HTMLElement)) return;
-      const state = particleState.get(card);
-      if (state?.hovered) return;
-      spawnParticles(card);
-    };
-
-    const handlePointerOut = (event: Event) => {
-      const card = (event.target as HTMLElement | null)?.closest?.(CARD_SELECTOR);
-      if (!(card instanceof HTMLElement)) return;
-      const next = event as PointerEvent;
-      if (next.relatedTarget instanceof Node && card.contains(next.relatedTarget)) return;
-      const state = particleState.get(card);
-      if (state) state.hovered = false;
-      clearParticles(card);
-    };
-
     const handleClick = (event: MouseEvent) => {
       const button = (event.target as HTMLElement | null)?.closest?.(BUTTON_SELECTOR);
       if (!(button instanceof HTMLElement)) return;
@@ -227,16 +133,11 @@ export function MagicGlowRoot() {
     };
 
     document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("pointerover", handlePointerOver);
-    document.addEventListener("pointerout", handlePointerOut);
     document.addEventListener("click", handleClick);
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("pointerover", handlePointerOver);
-      document.removeEventListener("pointerout", handlePointerOut);
       document.removeEventListener("click", handleClick);
-      document.querySelectorAll<HTMLElement>(CARD_SELECTOR).forEach((card) => clearParticles(card));
       spotlight.remove();
     };
   }, []);

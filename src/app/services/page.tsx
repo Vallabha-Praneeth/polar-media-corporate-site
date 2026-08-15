@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { PageHero } from "@/components/page-hero";
-import { company } from "@/config/company";
+import { company, serviceSlug } from "@/config/company";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -21,7 +21,11 @@ export default function ServicesPage() {
         <div className="container">
           <div className="service-grid service-grid--page">
             {company.services.map((service, index) => (
-              <article className="service-card service-card--large" key={service.title}>
+              <article
+                className="service-card service-card--large"
+                id={serviceSlug(service.title)}
+                key={service.title}
+              >
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <h2>{service.title}</h2>
                 <p>{service.description}</p>
