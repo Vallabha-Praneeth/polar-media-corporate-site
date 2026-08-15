@@ -55,24 +55,6 @@
   z-index: 2;
 }
 
-.magic-border-particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.magic-border-particle::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  background: rgba(var(--glow-color), 0.2);
-  border-radius: 50%;
-  z-index: -1;
-}
-
 .magic-border-spotlight {
   position: fixed;
   width: 800px;

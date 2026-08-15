@@ -24,7 +24,7 @@ export default function AboutPage() {
           <div className="prose-block">
             <h2>The company behind the name</h2>
             <p className="large-copy">{company.brandName} is the public-facing brand operated by {company.legalName}. The legal entity is incorporated in {company.country}.</p>
-            <p>{company.description ?? `The company’s registered office is in ${company.state}, ${company.country}. A fuller operating description will be published only after company approval.`}</p>
+            <p>{company.introCopy}</p>
           </div>
         </div>
       </section>
@@ -33,7 +33,7 @@ export default function AboutPage() {
           <div className="editorial-aside"><span>02</span><p>Our work</p></div>
           <div className="prose-block">
             <h2>Media and advertising across connected channels</h2>
-            <p>{company.description}</p>
+            <p>{company.aboutWorkCopy}</p>
             <p>Our public information focuses on the brand, its operating legal entity, and the services described on this website.</p>
             <Link className="button" href="/contact">Contact the company <span aria-hidden="true">→</span></Link>
           </div>

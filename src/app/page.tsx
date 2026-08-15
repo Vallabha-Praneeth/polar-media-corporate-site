@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { ContactPanel } from "@/components/contact-panel";
 import { HomeHeroThreads } from "@/components/home-hero-threads";
-import { company } from "@/config/company";
+import { company, serviceSlug } from "@/config/company";
 
 export default function Home() {
   return (
@@ -14,14 +14,25 @@ export default function Home() {
           <div className="home-hero__content">
             <p className="eyebrow">Media, made considered</p>
             <h1>Clear thinking.<br /><span>Purposeful media.</span></h1>
-            <p className="home-hero__lede">{company.description ?? company.relationshipStatement}</p>
+            <p className="home-hero__lede">{company.heroLede}</p>
             <div className="button-row">
               <Link className="button" href="/contact">Talk to us <span aria-hidden="true">→</span></Link>
               <Link className="text-link" href="/about">Discover our company <span aria-hidden="true">→</span></Link>
             </div>
           </div>
           <aside className="hero-composition" aria-label="Registered company identity">
-            <div className="hero-halftone" aria-hidden="true" />
+            {company.media.hero ? (
+              <Image
+                className="hero-media"
+                src={company.media.hero}
+                alt=""
+                fill
+                sizes="(max-width: 900px) 100vw, 46vw"
+                priority
+              />
+            ) : (
+              <div className="hero-halftone" aria-hidden="true" />
+            )}
             <div className="hero-card">
               <div className="hero-card__top">
                 <span>Registered identity</span>
@@ -63,7 +74,7 @@ export default function Home() {
           <div>
             <h2>A company built around thoughtful communication.</h2>
             <p className="large-copy">
-              {company.description ?? company.relationshipStatement}
+              {company.introCopy}
             </p>
             <div className="legal-note">
               <span className="legal-note__mark" aria-hidden="true">i</span>
@@ -87,7 +98,9 @@ export default function Home() {
             {company.services.map((service, index) => (
               <article className="service-card" key={service.title}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{service.title}</h3>
+                <h3>
+                  <Link href={`/services#${serviceSlug(service.title)}`}>{service.title}</Link>
+                </h3>
                 <p>{service.description}</p>
               </article>
             ))}

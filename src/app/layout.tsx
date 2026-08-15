@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from "next/font/google";
 
 import { MagicGlowRoot } from "@/components/magic-bento/magic-glow-root";
 import { SiteFooter } from "@/components/site-footer";
@@ -6,13 +7,34 @@ import { SiteHeader } from "@/components/site-header";
 import { company } from "@/config/company";
 import "./globals.css";
 
+const display = IBM_Plex_Sans_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-display-family",
+  display: "swap",
+});
+
+const body = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body-family",
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono-family",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(company.domain),
   title: {
     default: company.brandName,
     template: `%s | ${company.brandName}`,
   },
-  description: company.relationshipStatement,
+  description: company.heroLede,
   applicationName: company.brandName,
   alternates: { canonical: "/" },
   openGraph: {
@@ -21,7 +43,7 @@ export const metadata: Metadata = {
     url: company.domain,
     siteName: company.brandName,
     title: company.brandName,
-    description: company.relationshipStatement,
+    description: company.heroLede,
     images: [
       {
         url: "/og.png",
@@ -34,7 +56,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: company.brandName,
-    description: company.relationshipStatement,
+    description: company.heroLede,
     images: ["/og.png"],
   },
   robots: { index: true, follow: true },
@@ -65,7 +87,7 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />
