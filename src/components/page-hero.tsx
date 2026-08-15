@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 type PageHeroProps = {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   children?: ReactNode;
 };
 
@@ -16,7 +16,7 @@ export function PageHero({ eyebrow, title, description, children }: PageHeroProp
           <h1>{title}</h1>
         </div>
         <div className="page-hero__copy">
-          <p>{description}</p>
+          {description ? <p>{description}</p> : null}
           {children}
         </div>
       </div>
