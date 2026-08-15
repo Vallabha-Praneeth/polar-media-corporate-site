@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ContactPanel } from "@/components/contact-panel";
+import { HomeHeroThreads } from "@/components/home-hero-threads";
 import { company } from "@/config/company";
 
 export default function Home() {
   return (
     <>
       <section className="home-hero">
+        <HomeHeroThreads />
         <div className="container home-hero__grid">
           <div className="home-hero__content">
             <p className="eyebrow">Media, made considered</p>

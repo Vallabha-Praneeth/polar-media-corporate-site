@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { StaggeredMenu } from "@/components/staggered-menu/staggered-menu";
 import { company } from "@/config/company";
 
-const navigation = [
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
+const menuItems = [
+  { label: "Home", ariaLabel: "Go to home page", link: "/" },
+  { label: "About", ariaLabel: "Learn about the company", link: "/about" },
+  { label: "Services", ariaLabel: "View our services", link: "/services" },
+  { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
 ];
 
 export function BrandMark() {
@@ -30,18 +32,24 @@ export function SiteHeader() {
           <BrandMark />
           <span className="brand-wordmark">The Polar Media</span>
         </Link>
-        <nav aria-label="Primary navigation">
-          <ul className="nav-list">
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href}>{item.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <Link className="button button--compact header-cta" href="/contact">
-          Get in touch
-        </Link>
+        <div className="site-header__actions">
+          <Link className="button button--compact header-cta" href="/contact">
+            Get in touch
+          </Link>
+          <StaggeredMenu
+            position="right"
+            items={menuItems}
+            displaySocials={false}
+            displayItemNumbering
+            hideLogo
+            menuButtonColor="#0a1626"
+            openMenuButtonColor="#0a1626"
+            changeMenuColorOnOpen
+            colors={["#00d7f2", "#0a1626"]}
+            accentColor="#00d7f2"
+            closeOnClickAway
+          />
+        </div>
       </div>
     </header>
   );

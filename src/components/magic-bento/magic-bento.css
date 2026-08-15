@@ -1,0 +1,97 @@
+.button,
+.hero-card,
+.service-card,
+.contact-card,
+.contact-form {
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 220px;
+  --glow-color: 0, 215, 242;
+  --glow-border: 6px;
+  position: relative;
+}
+
+.button {
+  --glow-border: 2px;
+  --glow-radius: 140px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.service-card,
+.contact-card,
+.contact-form {
+  overflow: hidden;
+}
+
+.button::after,
+.hero-card::after,
+.service-card::after,
+.contact-card::after,
+.contact-form::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: var(--glow-border);
+  background: radial-gradient(
+    var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.85)) 0%,
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.4)) 30%,
+    transparent 60%
+  );
+  border-radius: inherit;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.magic-border-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.magic-border-particle::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: rgba(var(--glow-color), 0.2);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.magic-border-spotlight {
+  position: fixed;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button::after,
+  .hero-card::after,
+  .service-card::after,
+  .contact-card::after,
+  .contact-form::after {
+    display: none;
+  }
+}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { MagicGlowRoot } from "@/components/magic-bento/magic-glow-root";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { company } from "@/config/company";
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
+        <MagicGlowRoot />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
