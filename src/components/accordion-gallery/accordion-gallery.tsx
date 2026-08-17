@@ -242,7 +242,14 @@ export default function AccordionGallery({
               >
                 {/* Native img: Next/Image wrapping would break GSAP media refs. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.image} alt={item.alt || item.label || ""} draggable="false" />
+                <img
+                  src={item.image}
+                  alt={item.alt || item.label || ""}
+                  draggable="false"
+                  loading={i === defaultIndex ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={i === defaultIndex ? "high" : "low"}
+                />
               </span>
               <span className="ag-panel__overlay" aria-hidden="true" />
             </span>

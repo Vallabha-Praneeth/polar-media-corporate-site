@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ContactPanel } from "@/components/contact-panel";
 import { HomeHeroGallery } from "@/components/home-hero-gallery";
 import { HomeHeroThreads } from "@/components/home-hero-threads";
-import { company, serviceSlug } from "@/config/company";
+import { company, serviceSlug, telephoneHref } from "@/config/company";
 
 export default function Home() {
   return (
@@ -17,12 +17,21 @@ export default function Home() {
             <h1>Clear thinking.<br /><span>Purposeful media.</span></h1>
             <p className="home-hero__lede">{company.heroLede}</p>
             <div className="button-row">
-              <Link className="button" href="/contact">Talk to us <span aria-hidden="true">→</span></Link>
-              <Link className="text-link" href="/about">Discover our company <span aria-hidden="true">→</span></Link>
+              <a className="button" href={`mailto:${company.generalEmail}`}>
+                Email us <span aria-hidden="true">→</span>
+              </a>
+              {company.telephone && telephoneHref(company.telephone) ? (
+                <a className="text-link" href={telephoneHref(company.telephone)}>
+                  Call {company.telephone}
+                </a>
+              ) : (
+                <Link className="text-link" href="/about">
+                  Discover our company <span aria-hidden="true">→</span>
+                </Link>
+              )}
             </div>
           </div>
-          <aside className="hero-composition" aria-label="Work in physical media">
-            <HomeHeroGallery />
+          <aside className="hero-composition" aria-label="Registered company identity">
             <div className="hero-card">
               <div className="hero-card__top">
                 <span>Registered identity</span>
@@ -83,6 +92,9 @@ export default function Home() {
               <h2>What we do</h2>
             </div>
             <p>Digital, out-of-home, display, analytics, music and AI-enabled advertising capabilities.</p>
+          </div>
+          <div className="services-gallery">
+            <HomeHeroGallery />
           </div>
           <div className="service-grid">
             {company.services.map((service, index) => (

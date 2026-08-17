@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeaderCta } from "@/components/header-cta";
 import { StaggeredMenu } from "@/components/staggered-menu/staggered-menu";
 import { company } from "@/config/company";
 
@@ -33,9 +34,7 @@ export function SiteHeader() {
           <span className="brand-wordmark">The Polar Media</span>
         </Link>
         <div className="site-header__actions">
-          <Link className="button button--compact header-cta" href="/contact">
-            Get in touch
-          </Link>
+          <HeaderCta />
           <StaggeredMenu
             position="right"
             items={menuItems}
