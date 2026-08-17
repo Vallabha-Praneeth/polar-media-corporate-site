@@ -20,10 +20,12 @@ export default function AboutPage() {
       >
         <Image
           className="page-hero__media"
-          src="/media/about-hero.png"
+          src="/media/about-hero.gif"
           alt="Digital out-of-home display on a truck wrap and a standing LED board at night."
-          width={1024}
-          height={576}
+          width={1280}
+          height={720}
+          unoptimized
+          priority
         />
       </PageHero>
       <section className="section">
