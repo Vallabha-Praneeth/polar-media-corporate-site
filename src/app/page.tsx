@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ContactPanel } from "@/components/contact-panel";
+import { HomeHeroGallery } from "@/components/home-hero-gallery";
 import { HomeHeroThreads } from "@/components/home-hero-threads";
 import { company, serviceSlug } from "@/config/company";
 
@@ -20,19 +21,8 @@ export default function Home() {
               <Link className="text-link" href="/about">Discover our company <span aria-hidden="true">→</span></Link>
             </div>
           </div>
-          <aside className="hero-composition" aria-label="Registered company identity">
-            {company.media.hero ? (
-              <Image
-                className="hero-media"
-                src={company.media.hero}
-                alt=""
-                fill
-                sizes="(max-width: 900px) 100vw, 46vw"
-                priority
-              />
-            ) : (
-              <div className="hero-halftone" aria-hidden="true" />
-            )}
+          <aside className="hero-composition" aria-label="Work in physical media">
+            <HomeHeroGallery />
             <div className="hero-card">
               <div className="hero-card__top">
                 <span>Registered identity</span>

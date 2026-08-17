@@ -78,9 +78,8 @@ h3 { font-size: 1.4rem; line-height: 1.15; letter-spacing: -.015em; }
 .home-hero h1 { margin-bottom: 32px; }
 .home-hero h1 span { color: var(--polar-dark); }
 .home-hero__lede { max-width: 610px; margin-bottom: 34px; color: var(--ink-soft); font-size: 18px; }
-.hero-composition { position: relative; min-height: 430px; display: grid; align-items: center; }
-.hero-media { position: absolute; inset: 4px -60px 4px 38%; z-index: 1; object-fit: cover; pointer-events: none; opacity: .35; }
-.hero-halftone { position: absolute; inset: 4px -60px 4px 38%; opacity: .2; background-image: radial-gradient(var(--ink) 1.4px, transparent 1.5px); background-size: 11px 11px; }
+.hero-composition { position: relative; min-height: 430px; display: grid; align-items: stretch; gap: 18px; }
+.hero-accordion { min-width: 0; }
 .hero-card { position: relative; z-index: 2; width: min(100%, 520px); margin-left: auto; padding: 22px; border: 1px solid rgba(255,255,255,.12); border-radius: 6px; background: var(--black); color: var(--white); box-shadow: 22px 22px 0 var(--polar); }
 .hero-card__top { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,.12); color: #9bbbd3; font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
 .hero-signal { color: var(--polar); }
@@ -212,7 +211,7 @@ code { color: #733916; background: #fff0d9; border: 1px solid #d6a56d; font-fami
 @media (max-width: 900px) {
   .home-hero__grid, .page-hero__grid, .values-grid, .contact-panel__inner { grid-template-columns: 1fr; }
   .home-hero__grid { padding-top: 72px; }
-  .hero-composition { min-height: 430px; width: min(100%, 620px); }
+  .hero-composition { min-height: auto; width: min(100%, 620px); }
   .hero-card { margin-left: 0; }
   .intro-grid, .editorial-grid { grid-template-columns: .3fr 1.7fr; gap: 36px; }
   .section-heading { align-items: start; flex-direction: column; }
@@ -229,8 +228,7 @@ code { color: #733916; background: #fff0d9; border: 1px solid #d6a56d; font-fami
   .header-cta { min-height: 38px; padding: 0 13px; }
   .home-hero__grid { min-height: auto; padding-block: 62px 30px; }
   .home-hero h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
-  .hero-composition { min-height: 440px; width: 100%; margin-top: 10px; }
-  .hero-halftone { inset: 0 -30px 0 42%; }
+  .hero-composition { min-height: auto; width: 100%; margin-top: 10px; }
   .hero-card { width: calc(100% - 12px); padding: 17px; box-shadow: 12px 12px 0 var(--polar); }
   .hero-card__top { gap: 8px; font-size: 8px; }
   .hero-card__brand { grid-template-columns: 62px 1fr; gap: 14px; }

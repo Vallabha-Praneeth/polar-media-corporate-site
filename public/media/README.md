@@ -1,5 +1,9 @@
-# Optional hero photography
+# Optional photography
 
-Drop an approved Polar Media still here (for example `hero.webp`) and set `company.media.hero` in `src/config/company.ts` to the public path, such as `/media/hero.webp`.
+Approved Polar Media files live here.
 
-Leave `company.media.hero` as `null` until a real file is in place. Do not add stock photography.
+- `about-hero.gif` — About page hero
+- `gallery-booth-01.png` … `gallery-booth-04.png` — home accordion (exhibition booths)
+- `gallery-standee.jpg` — home accordion (digital standee)
+
+Do not add stock photography. Do not publish mockups that invent phone numbers, domains, or client names.
